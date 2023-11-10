@@ -1,62 +1,72 @@
+// Import required modules
+const path = require('path');  // Module to handle file paths
+const fs = require('fs');      // Module to handle file system operations
+const { v4: uuidv4 } = require('uuid');  // Module to generate unique IDs
+
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const { v4: uuidv4 } = require('uuid');
+const app = express();  // Initialize an Express application
+const PORT = process.env.PORT || 3001;  // Define the port for the server
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(express.json());  // Middleware to parse incoming JSON data
+app.use(express.urlencoded({ extended: true }));  // Middleware to parse URL-encoded data
+app.use(express.static('public'));  // Middleware to serve static assets
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static('public'));
+app.listen(PORT, () => {
+    console.log(`Server is live at http://localhost:${PORT}`);
+});
 
-// API Routes
+// Route to serve 'notes.html' file
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
+});
+
+// Route to retrieve all notes as JSON
 app.get('/api/notes', (req, res) => {
-    fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Error reading notes from the database.' });
-        }
-        const notes = JSON.parse(data);
-        res.json(notes);
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) throw err;
+        res.json(JSON.parse(data));
     });
 });
 
+// Default route to serve 'index.html' for unspecified endpoints
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
+// Route to handle adding a new note
 app.post('/api/notes', (req, res) => {
-    fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Error reading notes from the database.' });
-        }
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) throw err;
+
         const notes = JSON.parse(data);
-        const newNote = {
-            id: uuidv4(),
-            title: req.body.title,
-            text: req.body.text,
-        };
+        const newNote = { ...req.body, id: uuidv4() };  // Create new note with a unique ID
+
         notes.push(newNote);
 
-        fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(notes), (err) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({ error: 'Error saving the note to the database.' });
-            }
+        // Write updated notes back to the file
+        fs.writeFile('./db/db.json', JSON.stringify(notes, null, 2), err => {
+            if (err) throw err;
             res.json(newNote);
         });
     });
 });
 
-// HTML Routes
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'notes.html'));
-});
+// Route to handle deleting a specific note by ID
+app.delete('/api/notes/:id', (req, res) => {
+    const noteId = req.params.id;
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) throw err;
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+        let notes = JSON.parse(data);
+
+        // Filter out the note to be deleted
+        const updatedNotes = notes.filter(note => note.id !== noteId);
+
+        // Write the updated notes back to the file
+        fs.writeFile('./db/db.json', JSON.stringify(updatedNotes, null, 2), err => {
+            if (err) throw err;
+            res.json({ message: 'Note deleted successfully!' });
+        });
+    });
 });

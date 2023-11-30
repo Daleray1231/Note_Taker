@@ -23,7 +23,7 @@ The Note Taker app allows users to create, save, view, and delete notes. It prov
 ## Usage
 
 1. Clone or download the repository.
-2. Install necessary dependencies using `npm install`.
+2. Install necessary dependencies using `npm install`, also install `npm install uuid`.
 3. Run the application with `node server.js`.
 4. Access the app through a web browser via `http://localhost:<PORT>`, where PORT is the defined server port (default is 3001).
 5. Start creating, saving, and managing notes.

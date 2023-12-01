@@ -1,33 +1,52 @@
-# Note Taker App
+# Simple Note-taking App
 
-This application serves as a note-taking platform using Express.js.
-
-## Overview
-
-The Note Taker app allows users to create, save, view, and delete notes. It provides a simple and intuitive interface for managing personal notes, accessible through a web browser.
-
-## Features
-
-- **Create Notes:** Users can create new notes with a title and text content.
-- **Save Notes:** Notes can be saved for future reference.
-- **View Notes:** Access and view the existing notes from the list.
-- **Delete Notes:** Remove unwanted notes from the list.
-
-## Technologies Used
-
-- **Frontend:** HTML, CSS, Bootstrap, JavaScript
-- **Backend:** Node.js, Express.js
-- **Storage:** File system handling (fs module), database handling (JSON files)
-- **Miscellaneous:** UUID for unique ID generation
+This is a simple note-taking application built with Node.js and Express.
 
 ## Usage
 
-1. Clone or download the repository.
-2. Install necessary dependencies using `npm install`, also install `npm install uuid`.
-3. Run the application with `node server.js`.
-4. Access the app through a web browser via `http://localhost:<PORT>`, where PORT is the defined server port (default is 3001).
-5. Start creating, saving, and managing notes.
+### Running Locally
+1. Clone this repository.
+2. Install dependencies using `npm install`.
+3. Start the server with `node app.js`.
+4. Access the application at [http://localhost:3001](http://localhost:3001).
 
+### Using Deployed Heroku Link
+You can also access the deployed version of this app on Heroku: [Note App](https://afternoon-retreat-83951-636456bea0a3.herokuapp.com)
+
+## Features
+- View and add notes.
+- Delete specific notes by ID.
+
+## Dependencies
+- Express
+- uuid
+
+## Application Structure
+
+### `app.js`
+This file contains the main server setup and API endpoints for handling notes.
+
+### `public/`
+Folder containing static assets:
+- `index.html`: Landing page.
+- `notes.html`: Page to view and add notes.
+
+### `db/db.json`
+JSON file used to store notes.
+
+## API Endpoints
+
+### `GET /notes`
+Serves `notes.html` to view and add notes.
+
+### `GET /api/notes`
+Retrieves all notes as JSON.
+
+### `POST /api/notes`
+Adds a new note.
+
+### `DELETE /api/notes/:id`
+Deletes a specific note by ID.
 ## Notes
 
 - The project contains both the frontend HTML/CSS and backend Node.js code.
@@ -37,7 +56,7 @@ The Note Taker app allows users to create, save, view, and delete notes. It prov
 
 This application was built as part of a learning experience using Express.js and file system handling in Node.js.
 
-Github Repo: https://github.com/Daleray1231/Note_Taker   
-Heroku Deployed Application:
+[Github Repo](https://github.com/Daleray1231/Note_Taker)   
+[Heroku Deployed Application](https://afternoon-retreat-83951-636456bea0a3.herokuapp.com)
 
 ![Alt text](Untitled.png)

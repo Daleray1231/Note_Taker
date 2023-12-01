@@ -38,6 +38,6 @@ The Note Taker app allows users to create, save, view, and delete notes. It prov
 This application was built as part of a learning experience using Express.js and file system handling in Node.js.
 
 Github Repo: https://github.com/Daleray1231/Note_Taker   
-Github Deployed Application: https://daleray1231.github.io/Note_Taker 
+Heroku Deployed Application:
 
 ![Alt text](Untitled.png)

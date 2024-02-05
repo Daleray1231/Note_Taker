@@ -2,6 +2,8 @@
 
 This is a simple note-taking application built with Node.js and Express.
 
+![alt text](<public/assets/images/Opera Snapshot_2024-02-04_185839_localhost.png>)
+
 ## Usage
 
 ### Running Locally
@@ -58,5 +60,3 @@ This application was built as part of a learning experience using Express.js and
 
 [Github Repo](https://github.com/Daleray1231/Note_Taker)   
 [Heroku Deployed Application](https://afternoon-retreat-83951-636456bea0a3.herokuapp.com)
-
-![Alt text](Untitled.png)

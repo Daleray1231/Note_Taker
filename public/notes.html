@@ -2,12 +2,10 @@
 <html lang="en-US">
 
 <head>
-  <!-- Document Metadata -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Note Taker</title>
-  <!-- External Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
@@ -16,10 +14,8 @@
 </head>
 
 <body>
-  <!-- Navigation Bar -->
   <nav class="navbar bg-info">
     <a class="navbar-brand text-light p-3" href="/">Note Taker </a>
-    <!-- Buttons -->
     <div class="icons">
       <button type="button" class="btn btn-outline-light btn-sm save-note">
         <span class="fas fa-save"></span>
@@ -36,16 +32,13 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
   <div class="container-fluid">
     <div class="row">
-      <!-- Left Column - Note List -->
       <div class="col-4 list-container" id="list-container">
         <div class="card">
           <ul class="list-group" id="list-group"></ul>
         </div>
       </div>
-      <!-- Right Column - Note Form -->
       <div class="col-8">
         <form class="note-form">
           <input class="note-title" placeholder="Note Title" maxlength="28" type="text" />
@@ -55,7 +48,6 @@
     </div>
   </div>
 
-  <!-- JavaScript File -->
   <script src="/assets/js/index.js"></script>
 </body>
 
